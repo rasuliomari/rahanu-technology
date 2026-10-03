@@ -1,8 +1,11 @@
--- ============================================
--- RAHANU TECHNOLOGY DATABASE
--- ============================================
+-- ============================================================
+-- RAHANU TECHNOLOGY DATABASE SCHEMA
+-- ============================================================
 
+-- ============================================================
 -- TEAM MEMBERS
+-- ============================================================
+
 CREATE TABLE IF NOT EXISTS team_members (
     id SERIAL PRIMARY KEY,
     full_name VARCHAR(150) NOT NULL,
@@ -18,22 +21,38 @@ CREATE TABLE IF NOT EXISTS team_members (
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
-
+-- ============================================================
 -- SERVICES
+-- ============================================================
+
 CREATE TABLE IF NOT EXISTS services (
     id SERIAL PRIMARY KEY,
     title VARCHAR(150) NOT NULL,
+    slug VARCHAR(150) UNIQUE,
     short_description TEXT,
     description TEXT,
     icon VARCHAR(100),
     image VARCHAR(255),
     display_order INTEGER DEFAULT 0,
+    is_featured BOOLEAN DEFAULT FALSE,
     is_active BOOLEAN DEFAULT TRUE,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
+-- Support older databases that were created before slug/is_featured
+ALTER TABLE services
+ADD COLUMN IF NOT EXISTS slug VARCHAR(150);
 
+ALTER TABLE services
+ADD COLUMN IF NOT EXISTS is_featured BOOLEAN DEFAULT FALSE;
+
+CREATE UNIQUE INDEX IF NOT EXISTS services_slug_unique_idx
+ON services(slug);
+
+-- ============================================================
 -- PROJECTS
+-- ============================================================
+
 CREATE TABLE IF NOT EXISTS projects (
     id SERIAL PRIMARY KEY,
     title VARCHAR(200) NOT NULL,
@@ -50,8 +69,10 @@ CREATE TABLE IF NOT EXISTS projects (
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
-
+-- ============================================================
 -- CONTACT MESSAGES
+-- ============================================================
+
 CREATE TABLE IF NOT EXISTS contact_messages (
     id SERIAL PRIMARY KEY,
     full_name VARCHAR(150) NOT NULL,
@@ -63,8 +84,10 @@ CREATE TABLE IF NOT EXISTS contact_messages (
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
-
+-- ============================================================
 -- ADMIN USERS
+-- ============================================================
+
 CREATE TABLE IF NOT EXISTS admin_users (
     id SERIAL PRIMARY KEY,
     username VARCHAR(100) UNIQUE NOT NULL,

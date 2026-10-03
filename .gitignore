@@ -1,0 +1,29 @@
+# Maven
+target/
+
+# Local environment
+.env
+
+# Java
+*.class
+
+# Tomcat
+*.war
+
+# Logs
+*.log
+
+# IDE
+.idea/
+.vscode/
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Local configuration
+config/*.properties
+
+# Temporary files
+*.tmp
+*.bak
