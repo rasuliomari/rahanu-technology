@@ -1,29 +1,37 @@
 # Maven
+
 target/
-
-# Local environment
-.env
-
-# Java
 *.class
 
-# Tomcat
-*.war
+# IDE
+
+.vscode/
+.idea/
+*.iml
+
+# Environment / secrets
+
+.env
+config/.env
+config/*.local
+*.secret
 
 # Logs
+
 *.log
 
-# IDE
-.idea/
-.vscode/
+# Runtime uploads
+
+storage/*
+!storage/.gitkeep
 
 # OS files
+
 .DS_Store
 Thumbs.db
 
-# Local configuration
-config/*.properties
+# Tomcat generated files
 
-# Temporary files
-*.tmp
-*.bak
+work/
+temp/
+

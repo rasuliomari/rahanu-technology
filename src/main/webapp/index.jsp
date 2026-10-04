@@ -85,7 +85,7 @@
 
                 <div class="hero-buttons">
 
-                    <a href="services.jsp"
+                    <a href="services"
                        class="btn btn-primary btn-lg">
 
                         Explore Our Services
@@ -236,7 +236,7 @@
                         organizations and institutions.
                     </p>
 
-                    <a href="services.jsp">
+                    <a href="services">
                         Learn More
                         <i class="bi bi-arrow-right"></i>
                     </a>
@@ -268,7 +268,7 @@
                         experiences.
                     </p>
 
-                    <a href="services.jsp">
+                    <a href="services">
                         Learn More
                         <i class="bi bi-arrow-right"></i>
                     </a>
@@ -300,7 +300,7 @@
                         of systems and applications.
                     </p>
 
-                    <a href="services.jsp">
+                    <a href="services">
                         Learn More
                         <i class="bi bi-arrow-right"></i>
                     </a>
@@ -332,7 +332,7 @@
                         and sensitive information.
                     </p>
 
-                    <a href="services.jsp">
+                    <a href="services">
                         Learn More
                         <i class="bi bi-arrow-right"></i>
                     </a>
@@ -364,7 +364,7 @@
                         digital evidence.
                     </p>
 
-                    <a href="services.jsp">
+                    <a href="services">
                         Learn More
                         <i class="bi bi-arrow-right"></i>
                     </a>
@@ -396,7 +396,7 @@
                         infrastructure.
                     </p>
 
-                    <a href="services.jsp">
+                    <a href="services">
                         Learn More
                         <i class="bi bi-arrow-right"></i>
                     </a>

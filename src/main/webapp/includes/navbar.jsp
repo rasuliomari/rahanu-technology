@@ -1,8 +1,13 @@
+<%
+    String contextPath = request.getContextPath();
+%>
+
 <nav class="navbar navbar-expand-lg navbar-dark fixed-top rahanu-navbar">
+
     <div class="container">
 
         <a class="navbar-brand d-flex align-items-center"
-           href="index.jsp">
+           href="<%= contextPath %>/index.jsp">
 
             <div class="brand-icon">
                 <i class="bi bi-cpu-fill"></i>
@@ -24,6 +29,7 @@
                 aria-label="Toggle navigation">
 
             <span class="navbar-toggler-icon"></span>
+
         </button>
 
         <div class="collapse navbar-collapse" id="mainNavbar">
@@ -31,47 +37,57 @@
             <ul class="navbar-nav ms-auto align-items-lg-center">
 
                 <li class="nav-item">
-                    <a class="nav-link active" href="index.jsp">
+                    <a class="nav-link"
+                       href="<%= contextPath %>/index.jsp">
                         Home
                     </a>
                 </li>
 
                 <li class="nav-item">
-                    <a class="nav-link" href="about.jsp">
+                    <a class="nav-link"
+                       href="<%= contextPath %>/about.jsp">
                         About
                     </a>
                 </li>
 
                 <li class="nav-item">
-                    <a class="nav-link" href="services">
+                    <a class="nav-link"
+                       href="<%= contextPath %>/services">
                         Services
                     </a>
                 </li>
 
                 <li class="nav-item">
-                    <a class="nav-link" href="projects">
+                    <a class="nav-link"
+                       href="<%= contextPath %>/projects">
                         Projects
                     </a>
                 </li>
 
                 <li class="nav-item">
-                    <a class="nav-link" href="team">
+                    <a class="nav-link"
+                       href="<%= contextPath %>/team">
                         Our Team
                     </a>
                 </li>
 
                 <li class="nav-item">
-                    <a class="nav-link" href="contact.jsp">
+                    <a class="nav-link"
+                       href="<%= contextPath %>/contact.jsp">
                         Contact
                     </a>
                 </li>
 
                 <li class="nav-item ms-lg-3 mt-2 mt-lg-0">
-                    <a href="contact.jsp"
+
+                    <a href="<%= contextPath %>/contact.jsp"
                        class="btn btn-primary nav-cta">
+
                         Get Started
                         <i class="bi bi-arrow-right ms-1"></i>
+
                     </a>
+
                 </li>
 
             </ul>
@@ -79,4 +95,5 @@
         </div>
 
     </div>
+
 </nav>

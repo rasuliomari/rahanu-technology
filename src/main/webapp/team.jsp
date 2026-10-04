@@ -1,7 +1,14 @@
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page contentType="text/html;charset=UTF-8" %>
+<%@ page import="java.util.List" %>
+<%@ page import="tz.rahanu.technology.model.TeamMember" %>
 
-<%@ taglib prefix="c"
-           uri="jakarta.tags.core" %>
+<%
+List<TeamMember> teamMembers =
+(List<TeamMember>) request.getAttribute("teamMembers");
+
+String contextPath = request.getContextPath();
+
+%>
 
 <!DOCTYPE html>
 
@@ -9,192 +16,298 @@
 
 <head>
 
-    <meta charset="UTF-8">
+<meta charset="UTF-8">
 
-    <meta name="viewport"
-          content="width=device-width, initial-scale=1.0">
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0">
 
-    <title>Our Team | RAHANU TECHNOLOGY</title>
+<title>Our Team | RAHANU TECHNOLOGY</title>
 
-    <link
-        href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
-        rel="stylesheet">
+<meta name="description"
+      content="Meet the RAHANU TECHNOLOGY team.">
 
-    <link
-        href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css"
-        rel="stylesheet">
+<!-- Bootstrap -->
+<link
+    href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+    rel="stylesheet">
 
-    <link
-        rel="stylesheet"
-        href="css/style.css">
+<!-- Bootstrap Icons -->
+<link
+    href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css"
+    rel="stylesheet">
 
-    <link
-        rel="stylesheet"
-        href="css/team.css">
+<!-- Main CSS -->
+<link
+    rel="stylesheet"
+    href="<%= contextPath %>/css/style.css">
+
+<!-- Team CSS -->
+<link
+    rel="stylesheet"
+    href="<%= contextPath %>/css/team.css">
 
 </head>
 
-
 <body>
 
+<!-- ========================================================= -->
 
 <!-- NAVBAR -->
 
+<!-- ========================================================= -->
+
 <jsp:include page="includes/navbar.jsp"/>
 
+<!-- ========================================================= -->
 
 <!-- TEAM HERO -->
 
+<!-- ========================================================= -->
+
 <section class="team-hero">
 
-    <div class="container">
+<div class="container text-center">
 
-        <div class="team-hero-content text-center">
+    <div class="team-hero-content">
 
-            <span class="section-label">
-                THE PEOPLE BEHIND RAHANU
-            </span>
+        <span class="team-label">
 
-            <h1>
-                Meet Our <span>Team</span>
-            </h1>
+            <i class="bi bi-people-fill"></i>
 
-            <p>
-                A team of technology professionals committed to
-                building innovative software solutions and helping
-                organizations secure their digital environment.
-            </p>
+            RAHANU TECHNOLOGY
 
-        </div>
+        </span>
+
+        <h1>
+
+            Meet Our
+            <span>Team</span>
+
+        </h1>
+
+        <p>
+
+            Our team brings together software development,
+            cybersecurity, networking and technology expertise
+            to build reliable digital solutions.
+
+        </p>
 
     </div>
 
+</div>
+
 </section>
 
+<!-- ========================================================= -->
 
-<!-- TEAM SECTION -->
+<!-- TEAM MEMBERS -->
+
+<!-- ========================================================= -->
 
 <section class="team-section">
 
-    <div class="container">
+<div class="container">
+
+    <div class="text-center mb-5">
+
+        <span class="text-primary fw-bold">
+            OUR PEOPLE
+        </span>
+
+        <h2 class="fw-bold mt-2">
+            Technology Professionals
+        </h2>
+
+        <p class="text-muted mx-auto"
+           style="max-width: 700px;">
+
+            Meet the people behind RAHANU TECHNOLOGY and the
+            expertise they bring to our digital solutions.
+
+        </p>
+
+    </div>
 
 
-        <div class="row g-4 justify-content-center">
+    <div class="row g-4">
 
 
-            <c:forEach
-                    var="member"
-                    items="${teamMembers}">
+        <% if (teamMembers != null &&
+               !teamMembers.isEmpty()) { %>
 
-                <div class="col-xl-3 col-lg-4 col-md-6">
+
+            <% for (TeamMember member : teamMembers) { %>
+
+                <div class="col-md-6 col-lg-4">
 
                     <div class="team-card">
 
 
-                        <!-- PHOTO -->
+                        <!-- ================================================= -->
+                        <!-- TEAM MEMBER PHOTO -->
+                        <!-- ================================================= -->
 
                         <div class="team-image">
 
-                            <c:choose>
+                            <%
+                                String photo = member.getPhoto();
 
-                                <c:when test="${not empty member.photo}">
+                                boolean hasPhoto =
+                                        photo != null &&
+                                        !photo.trim().isEmpty();
+                            %>
 
-                                    <img
-                                        src="images/team/${member.photo}"
-                                        alt="${member.fullName}">
 
-                                </c:when>
+                            <% if (hasPhoto) { %>
 
-                                <c:otherwise>
+                                <img
+                                    src="<%= contextPath %>/<%= photo %>"
+                                    alt="Photo of <%= member.getFullName() %>"
+                                    loading="lazy">
 
-                                    <div class="default-team-image">
+                            <% } else { %>
 
-                                        <i class="bi bi-person-fill"></i>
+                                <div class="default-team-image">
 
-                                    </div>
+                                    <i class="bi bi-person-circle"></i>
 
-                                </c:otherwise>
+                                </div>
 
-                            </c:choose>
+                            <% } %>
 
+
+                            <!-- TEAM ROLE -->
 
                             <div class="team-role">
 
-                                ${member.roleType}
+                                <%= member.getRoleType() != null &&
+                                    !member.getRoleType().isBlank()
+                                    ? member.getRoleType()
+                                    : "TEAM MEMBER" %>
 
                             </div>
 
                         </div>
 
 
-                        <!-- CONTENT -->
+                        <!-- ================================================= -->
+                        <!-- TEAM MEMBER INFORMATION -->
+                        <!-- ================================================= -->
 
                         <div class="team-content">
 
                             <h4>
-                                ${member.fullName}
+                                <%= member.getFullName() %>
                             </h4>
 
+
                             <h6>
-                                ${member.position}
+                                <%= member.getPosition() %>
                             </h6>
 
-                            <p>
-                                ${member.biography}
-                            </p>
+
+                            <!-- BIOGRAPHY -->
+
+                            <% if (member.getBiography() != null &&
+                                   !member.getBiography().isBlank()) { %>
+
+                                <p>
+                                    <%= member.getBiography() %>
+                                </p>
+
+                            <% } %>
 
 
-                            <!-- Skills -->
+                            <!-- ================================================= -->
+                            <!-- SKILLS -->
+                            <!-- ================================================= -->
 
-                            <c:if test="${not empty member.skills}">
+                            <% if (member.getSkills() != null &&
+                                   !member.getSkills().isBlank()) { %>
 
                                 <div class="team-skills">
 
-                                    <c:forEach
-                                            var="skill"
-                                            items="${member.skills.split(',')}">
+                                    <%
+                                        String[] skills =
+                                                member.getSkills()
+                                                      .split(",");
+
+                                        for (String skill : skills) {
+
+                                            skill = skill.trim();
+
+                                            if (!skill.isEmpty()) {
+                                    %>
 
                                         <span>
-                                            ${skill}
+                                            <%= skill %>
                                         </span>
 
-                                    </c:forEach>
+                                    <%
+                                            }
+                                        }
+                                    %>
 
                                 </div>
 
-                            </c:if>
+                            <% } %>
 
 
-                            <!-- Social links -->
+                            <!-- ================================================= -->
+                            <!-- SOCIAL LINKS -->
+                            <!-- ================================================= -->
 
-                            <div class="team-social">
+                            <% if ((member.getLinkedinUrl() != null &&
+                                   !member.getLinkedinUrl().isBlank())
+                                   ||
+                                   (member.getGithubUrl() != null &&
+                                   !member.getGithubUrl().isBlank())) { %>
 
-                                <c:if test="${not empty member.linkedinUrl}">
-
-                                    <a
-                                        href="${member.linkedinUrl}"
-                                        target="_blank">
-
-                                        <i class="bi bi-linkedin"></i>
-
-                                    </a>
-
-                                </c:if>
+                                <div class="team-social">
 
 
-                                <c:if test="${not empty member.githubUrl}">
+                                    <!-- LinkedIn -->
 
-                                    <a
-                                        href="${member.githubUrl}"
-                                        target="_blank">
+                                    <% if (member.getLinkedinUrl() != null &&
+                                           !member.getLinkedinUrl().isBlank()) { %>
 
-                                        <i class="bi bi-github"></i>
+                                        <a
+                                            href="<%= member.getLinkedinUrl() %>"
+                                            target="_blank"
+                                            rel="noopener noreferrer"
+                                            title="LinkedIn"
+                                            aria-label="LinkedIn">
 
-                                    </a>
+                                            <i class="bi bi-linkedin"></i>
 
-                                </c:if>
+                                        </a>
 
-                            </div>
+                                    <% } %>
+
+
+                                    <!-- GitHub -->
+
+                                    <% if (member.getGithubUrl() != null &&
+                                           !member.getGithubUrl().isBlank()) { %>
+
+                                        <a
+                                            href="<%= member.getGithubUrl() %>"
+                                            target="_blank"
+                                            rel="noopener noreferrer"
+                                            title="GitHub"
+                                            aria-label="GitHub">
+
+                                            <i class="bi bi-github"></i>
+
+                                        </a>
+
+                                    <% } %>
+
+
+                                </div>
+
+                            <% } %>
 
                         </div>
 
@@ -202,54 +315,105 @@
 
                 </div>
 
-            </c:forEach>
+            <% } %>
 
 
-        </div>
+        <% } else { %>
+
+
+            <!-- ================================================= -->
+            <!-- NO TEAM MEMBERS -->
+            <!-- ================================================= -->
+
+            <div class="col-12">
+
+                <div class="team-empty">
+
+                    <i class="bi bi-people"></i>
+
+                    <h4>
+                        Our team information is currently unavailable.
+                    </h4>
+
+                    <p>
+                        Please check back again later.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+        <% } %>
 
     </div>
 
+</div>
+
 </section>
 
+<!-- ========================================================= -->
 
 <!-- CTA -->
 
-<section class="cta-section">
+<!-- ========================================================= -->
 
-    <div class="container text-center">
+<section
+    class="about-cta"
+    style="
+        padding: 90px 0;
+        background: linear-gradient(135deg, #0d6efd, #084298);
+        color: white;
+    ">
 
-        <span class="section-label">
-            WORK WITH US
-        </span>
+<div class="container text-center">
 
-        <h2>
-            Let's Build Something Great
-        </h2>
+    <i class="bi bi-chat-dots fs-1 mb-3"></i>
 
-        <p>
-            Have a technology project or security challenge?
-            Let's discuss how RAHANU TECHNOLOGY can help.
-        </p>
+    <h2 class="fw-bold">
+        Let's Build Something Together
+    </h2>
 
-        <a
-            href="contact.jsp"
-            class="btn btn-primary btn-lg">
+    <p
+        class="mx-auto"
+        style="
+            max-width: 650px;
+            color: rgba(255,255,255,0.82);
+            line-height: 1.8;
+        ">
 
-            Contact Us
+        Have a software, cybersecurity or technology project?
+        Talk to our team about your requirements.
 
-            <i class="bi bi-arrow-right ms-2"></i>
+    </p>
 
-        </a>
+    <a
+        href="<%= contextPath %>/contact.jsp"
+        class="btn btn-light btn-lg px-4">
 
-    </div>
+        Contact Us
+
+        <i class="bi bi-arrow-right ms-2"></i>
+
+    </a>
+
+</div>
 
 </section>
 
+<!-- ========================================================= -->
 
 <!-- FOOTER -->
 
+<!-- ========================================================= -->
+
 <jsp:include page="includes/footer.jsp"/>
 
+<!-- ========================================================= -->
+
+<!-- BOOTSTRAP JS -->
+
+<!-- ========================================================= -->
 
 <script
     src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js">

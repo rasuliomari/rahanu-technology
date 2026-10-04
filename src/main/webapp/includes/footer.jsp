@@ -63,7 +63,7 @@
                     </li>
 
                     <li>
-                        <a href="services.jsp">Services</a>
+                        <a href="services">Services</a>
                     </li>
 
                     <li>
@@ -71,7 +71,7 @@
                     </li>
 
                     <li>
-                        <a href="team.jsp">Our Team</a>
+                        <a href="team">Our Team</a>
                     </li>
 
                 </ul>
@@ -87,31 +87,31 @@
                 <ul class="footer-links">
 
                     <li>
-                        <a href="services.jsp">
+                        <a href="services">
                             Web Development
                         </a>
                     </li>
 
                     <li>
-                        <a href="services.jsp">
+                        <a href="services">
                             Mobile Development
                         </a>
                     </li>
 
                     <li>
-                        <a href="services.jsp">
+                        <a href="services">
                             Penetration Testing
                         </a>
                     </li>
 
                     <li>
-                        <a href="services.jsp">
+                        <a href="services">
                             Cybersecurity
                         </a>
                     </li>
 
                     <li>
-                        <a href="services.jsp">
+                        <a href="services">
                             Digital Forensics
                         </a>
                     </li>
